@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>我的博客</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<link rel="stylesheet" href="../../public/css/main.css"/>
+        <link rel="stylesheet" href="../../public/css/font-awesome.min.css"/>
+		<style>
+			.clear{
+				float: left;
+				position: relative;
+				left:41%;
+				top:20px;
+			}
+			.clear 	li{
+				list-style: none;
+				float: left;
+			}
+		</style>
+	</head>
+	<body class="landing">
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+				<!-- Header -->
+					<header id="header" class="alt">
+						<h1><a href="index.html">返回首页</a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>菜单</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="/">首页</a></li>
+											<li><a href="view">看帖</a></li>
+											<li><a href="/admin">用户管理</a></li>
+											<li><a href="/zhuce" id="zc">注册</a></li>
+											{%if userInfo.uid%}
+											<li><button onclick="ll">{{userInfo.uname}}/退出登录</button></li>
+											{%else%}
+											<li><a href="/login" id="dl">登录</a></li>
+											{%endif%}
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+					<section id="banner">
+						<div class="inner">
+							<h2>这是名字</h2>
+							<p>这是一行字<br />
+							没什么实际意思<br />
+							我写的.</p>
+							<ul class="actions">
+								{%if userInfo.uid%}
+								<li><a href="/login" class="button special">hello，{{userInfo.uname}}</a></li>
+								{%else%}
+								<li><a href="/login" class="button special">登录</a></li>
+								{%endif%}
+							</ul>
+						</div>
+						<a href="#one" class="more scrolly">了解更多</a>
+					</section>
+
+				<!-- One -->
+					<section id="one" class="wrapper style1 special">
+						<div class="inner">
+							<header class="major">
+								<h2>这个是标题1<br />
+								这个是对标题1的补充</h2>
+								<p>这是一堆没什么软用的内容这是一堆没什么软用的内容这是一堆没什么软用的内容这是一堆没什么软用的内容</p>
+							</header>
+							<ul class="icons major">
+								<li><span class="icon fa-diamond major style1"><span class="label">Lorem</span></span></li>
+								<li><span class="icon fa-heart-o major style2"><span class="label">Ipsum</span></span></li>
+								<li><span class="icon fa-code major style3"><span class="label">Dolor</span></span></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- Two -->
+					<section id="two" class="wrapper alt style2">
+						{% for content in contents %}
+						<section class="spotlight">
+							<div class="image"><img src="../../public/images/pic01.jpg" alt="" /></div><div class="content">
+								<h2>{{content.title}}<br />
+								作者：{{content.uname}}</h2>
+								<p>{{content.description}}</p>
+							</div>
+							<div class="function"><a href="/view?cid={{content.cid}}&mytype={{mytype}}">阅读全文</a></div>
+						</section>
+						{% endfor %}
+						<div class="pager">
+							<ul class="clear">
+								<li class="previous">
+									{% if page<=1 %}
+									<span>没有上一页了</span>
+									{%else%}
+									<a href="?page={{page-1}}&mytype={{mytype}}">上一页</a>
+									{%endif%}
+								</li>
+
+								<li>
+									<strong> {{page}} / {{pages}} </strong>
+								</li>
+
+								<li class="next">
+									{%if page>=pages%}
+									<span>没有下一页了</span>
+									{%else%}
+									<a href="?page={{page+1}}&mytype={{mytype}}">下一页</a>
+									{%endif%}
+								</li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- Three -->
+					<section id="three" class="wrapper style3 special">
+						<div class="inner">
+							<header class="major">
+								<h2>你想要看什么呢？</h2>
+								<p>见所见,所见非真见。闻所闻,所闻非真闻。何所闻而来？何所见而去？闻所闻而来，见所见而去。</p>
+							</header>
+							<ul class="features">
+								{% for type in types  %}
+								<li class="icon {{type.classs}}">
+									<a href="/?mytype={{type.tid}}">{{type.tname}}</a>
+									<p>{{type.description}}</p>
+								</li>
+								{%endfor%}
+							</ul>
+						</div>
+					</section>
+
+				<!-- CTA -->
+					<section id="cta" class="wrapper style4">
+						<div class="inner">
+							<header>
+								<h2>山羊的胡子</h2>
+								<p>担心是多余的，没回家的人们终归要回家</p>
+							</header>
+							<ul class="actions vertical">
+								{%if userInfo.uid%}
+								<li><a href="/login" class="button special">hello，{{userInfo.uname}}</a></li>
+								{%else%}
+								<li><a href="/login" class="button fit special">登录</a></li>
+								{%endif%}
+								<li><a href="#one" class="button fit">了解更多</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="icons">
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+						</ul>
+						<ul class="copyright">
+							<li>&copy;Hello World</li><li>欢迎光临我的博客</li>
+						</ul>
+					</footer>
+
+			</div>
+		<!-- Scripts -->
+			<script src="../../public/js/jquery.min.js"></script>
+			<script src="../../public/js/jquery.scrollex.min.js"></script>
+			<script src="../../public/js/jquery.scrolly.min.js"></script>
+			<script src="../../public/js/skel.min.js"></script>
+			<script src="../../public/js/util.js"></script>
+			<script src="../../public/js/main.js"></script>
+            <script src="../../public/js/index2.js"></script>
+	</body>
+</html>

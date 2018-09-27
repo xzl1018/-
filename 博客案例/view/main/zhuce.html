@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title></title>
+    <link href="../../public/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="../../public/js/jquery-1.12.4.min.js"></script>
+    <script src="../../public/js/index.js"></script>
+    <script>
+        $(document).ready(function(c) {
+            $('.alert-close').on('click', function(c){
+                $('.message').fadeOut('slow', function(c){
+                    $('.message').remove();
+                });
+            });
+        });
+
+    </script>
+</head>
+<body>
+<div class="message warning" id="userInfo">
+    <div class="inset">
+        <div class="login-head">
+            <h1>注册</h1>
+            <div class="alert-close"> </div>
+        </div>
+        <div class="f1">
+            <li>
+                <input type="text" class="text" placeholder="用户名" name="username" ><a href="#" class=" icon user"></a>
+            </li>
+            <div class="clear"> </div>
+            <li>
+                <input type="password"  placeholder="输入密码" name="password"  class="mm"> <a href="#" class="icon lock"></a>
+            </li>
+            <li>
+                <input type="password"  placeholder="确认密码" name="repassword" > <a href="#" class="icon lock"></a>
+            </li>
+            <div class="clear"> </div>
+            <div class="submit">
+                <input type="submit"  value="注册">
+                <h4><a href="/login">返回登录</a></h4>
+                <h4><a href="/">返回首页</a></h4>
+                <div class="clear">  </div>
+                <p class="colWarning textCenter"></p>
+            </div>
+    </div>
+
+    </div>
+</div>
+</div>
+<div class="clear"> </div>
+<div class="footer">
+    <p>欢迎光临我的博客</p>
+</div>
+</body>
+</html>

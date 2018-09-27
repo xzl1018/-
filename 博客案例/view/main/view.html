@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>博客看帖</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="../../public/css/main.css" />
+	</head>
+	<body>
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="/">返回首页</a></h1>
+					</header>
+
+				<!-- Main -->
+					<article id="main">
+						<header>
+							<h2>你好，旅行者</h2>
+							<p>快进来，外面的风像狼嚎一样，快找个位置随便坐</p>
+						</header>
+						<section class="wrapper style5">
+							<nav>
+								<div class="menu">
+									{% for type in types %}
+									{% if type.tid==mytype %}
+									<a href="/?mytype={{type.tid}}" class="active">{{type.tname}}</a>
+									{%else%}
+									<a href="/?mytype={{type.tid}}">{{type.tname}}</a>
+									{%endif%}
+									{%endfor%}
+								</div>
+							</nav>
+
+							<main class="clear">
+								<div class="mainLeft">
+									<div class="listBox">
+										<h1>{{content.title}}</h1>
+										<p class="colDefault">
+											作者：<span class="colInfo">{{content.uname}}</span>
+											时间：<span class="colInfo">{{content.addTime |date('Y年m月d日 H:i:s')}}</span>
+											阅读：<span class="colInfo">{{content.views}}</span>
+											评论：<span class="colInfo">{%if content.comments%}{{content.comments}}{%else%}0{%endif%}</span>
+										</p>
+										<dfn>{{content.content}}</dfn>
+									</div>
+
+									<div class="listBox message">
+										<h3 class="textLeft"><strong>评论</strong> <span class="em">一共有 <em id="messageCount">0</em> 条评论</span></h3>
+
+										{%if userInfo.uid%}
+										<p class="textLeft">{{userInfo.uname}}</p>
+										<p class="textLeft clear">
+											<textarea id="messageContent"></textarea>
+											<input type="hidden" id="contentId" value="{{content.cid}}" />
+											<button id="messageBtn" class="submit">提交</button>
+										</p>
+										{%else%}
+                                        <p class="bgDanger" style="line-height:30px;">你还没有登陆，请先<a href="/login">登陆</a></p>
+										{%endif%}
+
+										<div class="messageList">
+											{% for comment in comments %}
+											{% if comment.cid==content.cid %}
+											<div class="messageBox">
+												<p class="name clear">
+													<span class="f1">{{comment.uname}}</span>
+													<span class="fr">{{comment.ctime}}</span>
+												</p>
+												<p>{{comment.content}}</p>
+											</div>
+											{%endif%}
+											{%endfor%}
+										</div>
+									</div>
+								</div>
+							</main>
+						</section>
+					</article>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="icons">
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+						</ul>
+					</footer>
+
+			</div>
+        <script src="../../public/js/jquery-1.12.4.min.js"></script>
+		<script src="../../public/js/jquery.scrollex.min.js"></script>
+		<script src="../../public/js/jquery.scrolly.min.js"></script>
+		<script src="../../public/js/skel.min.js"></script>
+		<script src="../../public/js/util.js"></script>
+		<script src="../../public/js/main.js"></script>
+        <script src="../../public/js/index.js"></script>
+        <script src="../../public/js/index2.js"></script>
+		<script>
+            $("#messageBtn").on("click", function () {
+                var ctext=$("#messageContent").val();
+                var cid=$("#contentId").val();
+                var uname=$("p.textLeft").html();
+                var date=new Date();
+                var addTime=date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日"+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+                var nums=$("#messageCount").html();
+//            console.log(ctext+"-"+cid+"-"+uname+"-"+addTime);
+                $.ajax({
+                    type:'post',
+                    url:'/view',
+                    data:{
+                        ctext:ctext,
+                        cid:cid,
+                        uname:uname,
+                        addTime:addTime,
+                        nums:nums
+                    },
+                    success:function(result){
+                        if(result=="0"){
+                            alert("网络问题，评论失败");
+                        }
+                        if(result=="1"){
+                            alert("评论成功");
+                            window.location.reload();
+                        }
+                    }
+                });
+            })
+
+		</script>
+	</body>
+</html>

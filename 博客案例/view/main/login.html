@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title></title>
+<link href="../../public/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script src="../../public/js/jquery-1.12.4.min.js"></script>
+<script src="../../public/js/index2.js"></script>
+<script>
+	$(document).ready(function(c){
+	$('.alert-close').on('click', function(c){
+		$('.message').fadeOut('slow', function(c){
+	  		$('.message').remove();
+		});
+	});	  
+});
+</script>
+</head>
+<body>
+<div class="message warning">
+
+	<div class="rightBox" id="userInfo" style="display: none;">
+		<div class="title"><span>用户信息</span></div>
+		<p class="userName"><span class="colDark">{{userInfo.uname}}</span></p>
+		<!--判断是否是管理员-->
+
+		<p class="adminInfo">
+			<span class="colDanger">您好，管理员！</span>
+			<a href="/admin">进入管理界面</a>
+		</p>
+
+		<p><span class="colDanger">你好，欢迎光临我的博客！</span></p>
+		<p><span><a href="/">返回首页</a></span></p>
+		<p><span class="colDark"><a href="javascript:void(0)" id="logout">退出</a></span></p>
+	</div>
+
+<div class="inset" style="display: block;">
+	<div class="f1">
+	<div class="login-head" style="width:118%;display: block;position:relative;top:-49px;left: -32px;">
+		<h1>登录</h1>
+		 <div class="alert-close"> </div> 			
+	</div>
+
+			<li>
+				<input type="text" class="text" placeholder="用户名" name="username"><a href="#" class=" icon user"></a>
+			</li>
+				<div class="clear"> </div>
+			<li>
+				<input type="password" placeholder="请输入密码..." name="password"> <a href="#" class="icon lock"></a>
+			</li>
+			<div class="clear"> </div>
+			<div class="submit">
+				<input type="submit" value="登录" >
+				<h4><a href="/zhuce">注册账号</a></h4>
+				<h4><a href="/">返回首页</a></h4>
+						  <div class="clear">  </div>
+				<p class="colWarning textCenter"></p>
+			</div>
+				
+		</div>
+		</div>					
+	</div>
+	</div>
+	<div class="clear"> </div>
+<div class="footer">
+	<p>欢迎光临我的博客</p>
+</div>
+</body>
+</html>
